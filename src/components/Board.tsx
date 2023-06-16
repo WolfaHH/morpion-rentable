@@ -3,13 +3,13 @@ import { GameContext } from '@/contexts/GameContext';
 
 
 const Board: React.FC = () => {
-	const { squares, handleClick, won, blocked } = useContext(GameContext);
+	const { squares, handleClick, won, blocked, isXNext } = useContext(GameContext);
 
 	return (
-		<div className={won && won.player ? "board won" : "board"} style={{ position: 'relative' }}>
+		<div className={won && won.player ? "board won" : "board " + (isXNext ? 'X ' : 'O ')} style={{ position: 'relative' }}>
 			{squares.map((square, i) => (
 				<button
-					className={`${square ? 'square ' + (square as string).toLowerCase() : 'square'
+					className={`${square ? 'square ' + (square as string).toLowerCase() : 'square '
 						} ${blocked[i] ? 'blocked' : ''}`}
 					key={i}
 					onClick={() => handleClick(i)}
