@@ -13,7 +13,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Getting Started
 
 First, run the development server (Node v.20.3):
-
+```bash
+npm install
+```
 ```bash
 npm run dev
 ```
