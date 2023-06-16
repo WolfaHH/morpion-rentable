@@ -6,6 +6,14 @@
 Methode utilisé pour l'IA : Minimax 
 Cet algorithme fait le tour de tous les mouvements possibles dans le jeu et évalue chaque situation. On calcule le score selon le gagnant, le nombre de mouvements joués (la "profondeur" du jeu) et selon si c'est le tour du joueur "X" ou "O". Le joueur "X" essaie d'augmenter le score, tandis que "O" cherche à le diminuer. L'algorithme se sert aussi de quelque chose appelé élagage alpha-beta, qui permet de réduire le nombre de possibilités qu'il faut explorer dans l'arbre du jeu, ce qui rend le tout beaucoup plus efficace.
 
+J'ai ajouté en plus quelques règles heuristiques en amont
+Voici les heuristiques pour 'O' (en supposant que 'X' commence en premier) :
+
+Si le centre est libre, choisissez le centre.
+Si l'adversaire a une fourche (deux façons de gagner), bloquez-la.
+Si l'adversaire a un coin, prenez le coin opposé.
+Si un bord est libre, prenez le bord.
+
 Techno utilisé : Next.JS / tsx / SCSS
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
