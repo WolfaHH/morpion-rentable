@@ -1,0 +1,285 @@
+//imports
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
+// VAriables
+$background-color: black;
+$text-color: white;
+$player-color: darkcyan;
+$computer-color: darkgreen;
+$image-size: 50px;
+$button-color: white;
+$button-hover-color: lightgray;
+$transition-speed: 0.3s;
+$shadow-color: rgba(0, 0, 0, 0.24);
+$grid-size: 3; // 3x3 grid
+$win-line-width: 6px;
+$win-line-color: darkred;
+
+// General Styles
+body {
+    background-color: $background-color;
+    color: $text-color;
+    font-family: 'Finger Paint', Arial, sans-serif;
+    text-align: center;
+    transition: color $transition-speed;
+}
+
+.sound {
+    position: absolute;
+    top: 30px;
+    right: 36px;
+    transform: scale(1.5);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.6);
+    }
+
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+button {
+    background-color: $button-color;
+    border: none;
+    color: $background-color;
+    text-align: center;
+    padding: 15px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform $transition-speed, box-shadow $transition-speed, background-color $transition-speed;
+
+    &:hover {
+        background-color: darken($button-hover-color, 10%);
+        transform: scale(1.02);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+        transform: scale(0.98);
+        background-color: darken($button-color, 15%);
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+h1 {
+    margin-top: 50px;
+    text-shadow: 0 2px 4px $shadow-color;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 20px 0;
+    text-shadow: 0 2px 4px $shadow-color;
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        span {
+            margin: 0 10px;
+        }
+
+        img {
+            width: $image-size;
+            height: $image-size;
+            border: white 1px solid;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px $shadow-color;
+        }
+    }
+
+    span {
+        margin: 0 10px;
+    }
+}
+
+// Board Styles
+.board {
+    display: grid;
+    grid-template-columns: repeat($grid-size, 1fr);
+    grid-gap: 5px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        line-height: 60px;
+        box-shadow: 0 2px 4px $shadow-color;
+        border-radius: 5px;
+        transition: color $transition-speed;
+        font-family: 'Finger Paint', Arial, sans-serif;
+        font-size: 70px;
+        margin: 4px 4px;
+
+        @media(max-width: 768px) {
+            width: 100px;
+            height: 100px;
+            font-size: 60px;
+            margin: 2px 2px;
+        }
+
+        &:hover {
+            transform: scale(1.009);
+        }
+
+        &:active {
+            transform: scale(0.992);
+        }
+
+        &:not(.blocked):hover::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: red;
+        }
+    }
+
+    &.X button:not(.blocked):hover::after {
+        content: "X";
+    }
+
+    &.O button:not(.blocked):hover::after {
+        content: "O";
+    }
+}
+
+.won
+{
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+    transform: scale(0.98);
+}
+// X and O colors
+.x {
+    color: $player-color;
+}
+
+.o {
+    color: $computer-color;
+}
+
+// Game Status
+.game-status {
+    text-shadow: 0 2px 4px $shadow-color;
+    font-size: 24px;
+    margin-top:40px;
+    margin-bottom: 50px;
+}
+
+
+
+//  Cursor
+
+
+
+.cursor {
+    position: fixed;
+    pointer-events: none;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+    z-index: 9999;
+    box-shadow: 0 0 5px #fff;
+  }
+  
+  .cursor::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin-left: -14px;
+    margin-top: -14px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.1);
+    animation: pulse 1s infinite;
+  }
+  
+  .cursor::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 50%;
+    top: 50%;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0.5;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+
+
+// Winning line
+
+.win-line {
+    position: absolute;
+    background-color: $win-line-color;
+    height: $win-line-width;
+    transform-origin: left top;
+    pointer-events: none;
+    transition: all $transition-speed;
+    border-radius: 5px; 
+    box-shadow: 0 2px 4px $shadow-color; 
+
+    &.horizontal {
+        width: 96%;
+        left: 2%;
+    }
+
+    &.vertical {
+        width: 96%;
+        top: 2%;
+        transform: rotate(90deg);
+    }
+
+    &.diagonal-right {
+        width: 135.76%;
+        bottom: 97%;
+        left: 2.3%;
+        transform: rotate(45deg);
+    }
+
+    &.diagonal-left {
+        width: 135.76%;
+        top: 98%;
+        left: 1.5%;
+        transform: rotate(-45deg);
+    }
+
+}
