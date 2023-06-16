@@ -22,6 +22,7 @@ body {
     font-family: 'Finger Paint', Arial, sans-serif;
     text-align: center;
     transition: color $transition-speed;
+    cursor: none !important;
 }
 
 .sound {

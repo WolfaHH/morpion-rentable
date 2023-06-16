@@ -40,7 +40,7 @@ const Game: React.FC = () => {
 		}
 		animationFrameId.current = requestAnimationFrame(() => {
 			if (cursorRef.current) {
-				cursorRef.current.style.transform = `translate(${e.clientX - 859}px, ${e.clientY - 353
+				cursorRef.current.style.transform = `translate(${e.clientX - 869}px, ${e.clientY - 363
 					}px)`;
 			}
 		});
