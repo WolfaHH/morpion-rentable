@@ -103,37 +103,6 @@ function getBestMove(squares: Array<string | null>): number {
         return 4;
     }
 
-    // Checking for forks et les bloquer
-    let forks = [
-        [0, 2, 1],
-        [0, 6, 3],
-        [2, 8, 5],
-        [6, 8, 7],
-        [0, 8, 4],
-        [2, 6, 4]
-    ];
-    for (let i = 0; i < forks.length; i++) {
-        if (squares[forks[i][0]] === 'X' && squares[forks[i][1]] === 'X' && squares[forks[i][2]] === null) {
-            return forks[i][2];
-        }
-    }
-
-    // Checking les coners
-    let corners = [0, 2, 6, 8];
-    for (let i = 0; i < corners.length; i++) {
-        if (squares[corners[i]] === 'X') {
-            return 8 - corners[i];
-        }
-    }
-
-    // Checking les bords
-    let edges = [1, 3, 5, 7];
-    for (let i = 0; i < edges.length; i++) {
-        if (squares[edges[i]] === null) {
-            return edges[i];
-        }
-    }
-
     // si aucune des regles heuristiques, on appelle la fonction.
     return minimax(squares, 0, false, -Infinity, Infinity);
 }
