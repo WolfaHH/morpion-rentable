@@ -36,16 +36,15 @@ const Game: React.FC = () => {
 	// Gestion du curseur (C'est un effet amusant, mais à ne pas utiliser en prod)
 	const setFromEvent = (e: MouseEvent) => {
 		if (animationFrameId.current) {
-			cancelAnimationFrame(animationFrameId.current);
+		  cancelAnimationFrame(animationFrameId.current);
 		}
 		animationFrameId.current = requestAnimationFrame(() => {
-			if (cursorRef.current) {
-				cursorRef.current.style.transform = `translate(${e.clientX - 869}px, ${e.clientY - 363
-					}px)`;
-			}
+		  if (cursorRef.current) {
+			cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+		  }
 		});
-	};
-
+	  };
+	  
 	useEffect(() => {
 		window.addEventListener('mousemove', setFromEvent);
 		AOS.init(); // Initialize AOS
@@ -61,11 +60,19 @@ const Game: React.FC = () => {
 	return (
 		<div>
 			<Head>
-				<title>Custom Cursor Page</title>
+				<title>Morpion Wolfa'</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+			<div
+					ref={cursorRef}
+					className="cursor"
+					style={{
+						width: '20px',
+						height: '20px',
+					}}
+				/>
 			<div onClick={toggleMute} className='sound'>
-				{isMuted ? <FiVolumeX size={24} /> : <FiVolume2 size={24} />}
+				{isMuted ? <FiVolumeX size={32} /> : <FiVolume2 size={32} />}
 			</div>
 			<div className="main" onClick={parentClickHandler}>
 				<h1 data-aos="fade-up">Le Morpion de Wolfa'</h1>
@@ -75,14 +82,6 @@ const Game: React.FC = () => {
 					<GameStatus />
 				</div>
 				<button onClick={resetGame}>Restart Game</button>
-				<div
-					ref={cursorRef}
-					className="cursor"
-					style={{
-						width: '20px',
-						height: '20px',
-					}}
-				/>
 			</div>
 		</div>
 	);
